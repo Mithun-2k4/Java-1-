@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class UnionOfLists {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String list1 = scanner.nextLine();
+        String list2 = scanner.nextLine();
+        String union = findUnion(list1, list2);
+        System.out.println(union);
+        
+        scanner.close();
+    }
+    
+    public static String findUnion(String list1, String list2) {
+        Set<Character> set = new HashSet<>();
+        StringBuilder result = new StringBuilder();
+        for (char c : list1.toCharArray()) {
+            set.add(c);
+        }
+        boolean commonFound = false;
+        for (char c : list2.toCharArray()) {
+            if (set.contains(c)) {
+                commonFound = true;
+            }
+            set.add(c);
+        }
+        if (commonFound) {
+            List<Character> sortedList = new ArrayList<>(set);
+            Collections.sort(sortedList);
+            for (char c : sortedList) {
+                result.append(c+" ");
+            }
+            return result.toString();
+        } else {
+            return "-1";
+        }
+    }
+}
